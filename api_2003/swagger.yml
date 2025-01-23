@@ -1,0 +1,59 @@
+openapi: 3.0.0
+info:
+  title: "2003 REST API"
+  description: "an api for game data"
+  version: "1.0.0"
+servers:
+  - url: "/api"
+
+components:
+  schemas:
+    User:
+      type: "object"
+      required:
+        - Level_ID
+        - Role_ID
+        - Username
+        - Email
+        - Password
+        - xpTotal
+      properties:
+        Level_ID:
+            type: "integer"
+            description: "The user level"
+        Role_ID: 
+            type: "integer"
+            description: "The type of user role"
+        Username:
+          type: "string"
+          description: "Name of the user"
+        Email:
+          type: "string"
+          description: "Email of the user"
+        Password:
+          type: "string"
+          description: "Need for the user login"
+        xpTotal:
+            type: "integer"
+            description: "Total of xp points"
+
+
+paths:
+  /user:
+    post:
+      operationId: "user.create"
+      tags:
+        - "User"
+      summary: "Create a user"
+      requestBody:
+        description: "User creation"
+        required: true
+        content:
+          application/json:
+            schema:
+              x-body-name: "user"
+              $ref: "#/components/schemas/User"
+      responses:
+        "201":
+          description: "Successfully Create User"
+  
